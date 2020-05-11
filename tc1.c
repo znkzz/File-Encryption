@@ -23,7 +23,7 @@ v1.5 TODO
 
 */
 int  main(int argc,char*argv[]) {
-		notice("文件加密器 版本:v1.3 date:2020\\2\\15 by znkzz");
+		notice("文件加密器 版本:v1.3.1 date:2020\\5\\11 by znkzz");
 	if(argc!=5) {
 		error("命令行参数错误!");
 		exit(-1);
@@ -152,10 +152,12 @@ short DecodeFile(const  char * File_0,const char *File_E/*,char (*p) (void)*/) {
 	successful("文件内容已成功读取.");
 
 	unsigned long i;
+	char t;
 	for (i = 0; i < StrLong; i++) {
-
-		pDATA[i]^=(GetRanDomKey());
-printf("%d\t",pDATA[i]);
+t=GetRanDomKey();
+		pDATA[i]^=t;
+printf("%c\n",t);
+Sleep(300);
 	}
 	successful("文件已解密完毕.正在效验文件中······");
 
@@ -192,7 +194,7 @@ unsigned long GetrFileSizeK(const char *path) {
 char GetRanDomKey() {
 	static unsigned short con; //密钥长度不会很长
 	++con;
-	if(con==(strlen(Key)+1)) {
+	if(con==(strlen(Key))) {
 		con=0;
 	}
 
